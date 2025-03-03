@@ -1,3 +1,7 @@
+let accessToken = null; 
+let tokenExpiryTime = 0;
+
+// new token
 export const getAccessToken = async () => {
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
   const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
@@ -5,9 +9,17 @@ export const getAccessToken = async () => {
   if (!clientId || !clientSecret) {
     console.error("❌ Missing Spotify API credentials in .env file!");
     return null;
-  } //checks if Spotify API credentials are available
+  }
 
-  const encodedCredentials = btoa(`${clientId}:${clientSecret}`); // Encodes the credentials
+  // checks if token exists
+  const currentTime = Date.now();
+  if (accessToken && currentTime < tokenExpiryTime) {
+    return accessToken;
+  }
+
+  // encoding 
+  const encodedCredentials = btoa(`${clientId}:${clientSecret}`);
+
   try {
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
@@ -25,23 +37,27 @@ export const getAccessToken = async () => {
       return null;
     }
 
-    return data.access_token;
+    // Stores token 
+    accessToken = data.access_token;
+    tokenExpiryTime = Date.now() + data.expires_in * 1000 - 60000; // Refresh 1 min before expiry
+
+    return accessToken;
   } catch (error) {
     console.error("❌ Error fetching access token:", error);
     return null;
   }
 };
 
-// Trending songs are fetched before user searches
+//  Trending SOng is fetched 
 export const getTrendingTracks = async () => {
-  const accessToken = await getAccessToken();
-  if (!accessToken) return [];
+  const token = await getAccessToken();
+  if (!token) return [];
 
   try {
     const response = await fetch(
-      `https://api.spotify.com/v1/browse/new-releases?limit=5`,
+      "https://api.spotify.com/v1/browse/new-releases?limit=5",
       {
-        headers: { Authorization: `Bearer ${accessToken}` },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
 
@@ -63,18 +79,18 @@ export const getTrendingTracks = async () => {
   }
 };
 
-// Searches for tracks
+//  song search
 export const searchTracks = async (query) => {
   if (!query) return [];
 
-  const accessToken = await getAccessToken();
-  if (!accessToken) return [];
+  const token = await getAccessToken();
+  if (!token) return [];
 
   try {
     const response = await fetch(
       `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=5`,
       {
-        headers: { Authorization: `Bearer ${accessToken}` },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
 
