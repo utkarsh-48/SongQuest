@@ -15,33 +15,44 @@ const loadingMessages = [
 const randomMessage =
   loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
 
-const Cards = ({ tracks }) => {
-  return (
-    <div>
-      {tracks.length > 0 ? (
-        <div>
-          {tracks.map((track, index) => (
-            <div  key={index}>
-              <div >
-                <img src={track.image || null} alt={track.name} />
+  const Cards = ({ tracks, randomMessage }) => {
+    return (
+      <div className="p-4">
+        {tracks.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {tracks.map((track, index) => (
+              <div
+                key={index}
+                className="bg-black text-white p-4 rounded-lg shadow-md flex items-center space-x-4"
+              >
+                <div className="w-24 h-24">
+                  <img
+                    src={track.image || '/default-image.jpg'}
+                    alt={track.name}
+                    className="w-full h-full object-cover rounded-md"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <h1 className="text-lg font-semibold">{track.name}</h1>
+                  <h2 className="text-gray-400 text-sm">{track.artist}</h2>
+                </div>
               </div>
-              <h1 className="">{track.name}</h1>
-              <h2>{track.artist}</h2>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <>
-          <div className="loading-container">
-            <div className="loading-bar">
-              <div className="progress"></div>
-            </div>
-            <p>{randomMessage}</p>
+            ))}
           </div>
-        </>
-      )}
-    </div>
-  );
-};
+        ) : (
+          <>
+            <div className="loading-container">
+              <div className="loading-bar">
+                <div className="progress"></div>
+              </div>
+              <p>{randomMessage}</p>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  };
+  
+
 
 export default Cards;
