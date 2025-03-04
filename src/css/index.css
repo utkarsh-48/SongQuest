@@ -1,12 +1,4 @@
 @import "tailwindcss";
 body{
-  background-image: url("../assets/2nd.gif");
-    background-size: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-  
+  background-color: aliceblue;
 }

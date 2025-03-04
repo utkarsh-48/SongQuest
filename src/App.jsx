@@ -29,14 +29,14 @@ function App() {
 
   return (
     <div>
-      {/* < NavBar />
+      < NavBar />
       < Title />
       <div>
           <SearchBar onSearch={handleSearch} />
           <h2>{isSearching ? "Search Results" : "Trending Songs"}</h2>
       </div>
       <Cards tracks={tracks} />
-      < Footer /> */}
+      < Footer />
     </div>
   );
 }

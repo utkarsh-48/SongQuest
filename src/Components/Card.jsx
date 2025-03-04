@@ -22,7 +22,7 @@ const Cards = ({ tracks }) => {
         <div>
           {tracks.map((track, index) => (
             <div  key={index}>
-              <div>
+              <div >
                 <img src={track.image || null} alt={track.name} />
               </div>
               <h1 className="">{track.name}</h1>
