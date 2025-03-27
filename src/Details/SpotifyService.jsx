@@ -55,7 +55,7 @@ export const getTrendingTracks = async () => {
 
   try {
     const response = await fetch(
-      "https://api.spotify.com/v1/browse/new-releases?limit=5",
+      "https://api.spotify.com/v1/browse/new-releases?limit=18",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -88,7 +88,7 @@ export const searchTracks = async (query) => {
 
   try {
     const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=5`,
+      `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=18`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

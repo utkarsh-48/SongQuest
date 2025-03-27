@@ -2,12 +2,9 @@ import React from "react";
 import { FaMusic } from "react-icons/fa";
 
 function NavBar() {
-  const light = true;
   return (
     <div
-      className={`flex w-full justify-between h-16 ${
-        light ? "bg-[#F0F8FF] text-black" : "bg-black text-white"
-        } items-center px-10 py-9`}
+      className={`flex w-full justify-between h-16 bg-{#121212} text-white items-center px-10 py-9`}
     >
       <div className="flex items-center gap-2">
         <FaMusic className="text-[#9E2B25] text-2xl" />

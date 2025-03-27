@@ -31,12 +31,12 @@ function App() {
     <div>
       < NavBar />
       < Title />
-      <div>
+      <div className="flex flex-col items-center">
           <SearchBar onSearch={handleSearch} />
-          <h2>{isSearching ? "Search Results" : "Trending Songs"}</h2>
+          <h2 className="mt-5 text-2xl">{isSearching ? "Search Results" : "Trending Songs"}</h2>
       </div>
       <Cards tracks={tracks} />
-      < Footer />
+      {/* < Footer /> */}
     </div>
   );
 }

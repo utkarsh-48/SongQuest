@@ -15,21 +15,25 @@ const loadingMessages = [
 const randomMessage =
   loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
 
-  const Cards = ({ tracks, randomMessage }) => {
+  const Cards = ({ tracks }) => {
     return (
-      <div className="p-4">
+      <div className=" p-6 md:p-10">
         {tracks.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
             {tracks.map((track, index) => (
               <div
                 key={index}
-                className="bg-black text-white p-4 rounded-lg shadow-md flex items-center space-x-4"
+                className="
+                  text-white p-4 rounded-lg flex items-center space-x-4 
+                  bg-black/30 border border-gray-700 shadow-lg shadow-gray-900/50 
+                  hover:bg-gray-800 transition duration-200 backdrop-blur-lg
+                "
               >
                 <div className="w-24 h-24">
                   <img
                     src={track.image || '/default-image.jpg'}
                     alt={track.name}
-                    className="w-full h-full object-cover rounded-md"
+                    className="w-full h-full object-cover rounded-md"   
                   />
                 </div>
                 <div className="flex flex-col">
